@@ -1,0 +1,12 @@
+{
+  "name": "aura-gaming",
+  "version": "1.0.0",
+  "description": "Aura Gaming\r # Aura Gaming\r Aura Gaming is a platform where gamers can join game rooms, register for events, and participate in real-time gaming communities.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
