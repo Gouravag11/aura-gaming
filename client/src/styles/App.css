@@ -1,0 +1,186 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  color: #ffffff;
+}
+
+.App {
+  text-align: center;
+  padding: 20px;
+}
+
+nav {
+  background-color: #1f1f1f;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin-right: 20px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.2rem;
+}
+
+nav ul li a:hover {
+  color: #007bff;
+}
+
+h1 {
+  color: #007bff;
+}
+
+.carousel-item img {
+  border-radius: 10px;
+}
+
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.sign-in-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.sign-in-page h2 {
+  margin-bottom: 20px;
+}
+
+.sign-in-page button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sign-in-page button:hover {
+  background-color: #357ae8;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #222;
+  color: white;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  height: 30px;
+  width: 30px;
+  margin-right: 8px; /* Adjust the spacing as needed */
+}
+
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #ecf0f1; /* change to your desired color */
+}
+
+.logo-img {
+  width: 30px; /* change to your desired width */
+  height: 30px; /* change to your desired height */
+  margin-right: 10px; /* change to your desired margin */
+}
+
+.logo-text {
+  font-size: 24px; /* change to your desired font size */
+  font-weight: bold; /* change to your desired font weight */
+}
+
+.navbar-center {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1; /* Allow this section to take up available space */
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.navbar-links {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1; /* Allow the list to take up available space */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links li {
+  display: inline-block;
+  margin-left: 20px;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: #ecf0f1;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links a:hover {
+  color: #ddd;
+}
+
+.centered-link {
+  text-align: center;
+}
+
+.home-container {
+  padding: 20px;
+  text-align: center;
+}
+
+.description-section {
+  margin-top: 30px;
+}
+
+.description-section h2 {
+  font-size: 2rem;
+  color: #999;
+}
+
+.description-section p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-top: 10px;
+  line-height: 1.6;
+}
