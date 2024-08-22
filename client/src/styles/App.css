@@ -11,6 +11,27 @@ body {
   padding: 20px;
 }
 
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.item {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.item:hover {
+  transform: scale(1.05);
+}
+
+
 nav {
   background-color: #1f1f1f;
   padding: 10px 0;
@@ -82,7 +103,7 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 0px 20px;
   background-color: #222;
   color: white;
 }
@@ -95,6 +116,18 @@ h1 {
 .nav-link {
   display: flex;
   align-items: center;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  color: #f39c12;
+  transform: scale(1.0);
+}
+
+
+.navbar-links a.nav-link:hover {
+  color: #f39c12; /* Ensure this is visible and not overridden */
+  transform: scale(1.1);
 }
 
 .icon {
@@ -122,10 +155,17 @@ h1 {
   font-weight: bold; /* change to your desired font weight */
 }
 
+.logo-text:hover{
+  transition: transform 0.3s ease;
+  color: #f39c12;
+}
+
 .navbar-center {
   display: flex;
   justify-content: center;
   flex-grow: 1; /* Allow this section to take up available space */
+  align-items: center;
+  padding: 0 20px;
 }
 
 .navbar-right {
@@ -183,4 +223,32 @@ h1 {
   color: #666;
   margin-top: 10px;
   line-height: 1.6;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.splash-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+}
+
+.splash-logo {
+  width: 288px;
+  height: 576px;
+  margin-bottom: 20px;
+}
+
+.splash-text {
+  font-size: 2rem;
+  font-weight: bold;
 }

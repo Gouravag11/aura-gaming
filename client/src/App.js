@@ -1,35 +1,77 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import GameRooms from './pages/GameRooms';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import { AnimatePresence } from 'framer-motion';
 import './styles/App.css';
-import ProtectedRoute from './components/ProtectedRoute';
-
+import PageTransition from './components/PageTransition';
+import SplashScreen from './components/SplashScreen';
 
 function App() {
+    const location = useLocation();
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Simulate a loading time (e.g., fetching resources)
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 2000); // Adjust the duration as needed
+
+        return () => clearTimeout(timer);
+    }, []);
+
+    return (
+        <div className="App">
+            {isLoading ? (
+                    <SplashScreen />
+                ) : (
+                    <>
+                        <Navbar />
+                            <AnimatePresence mode="wait">
+                            <Routes location={location} key={location.pathname}>
+                                <Route 
+                                    path="/" 
+                                    element={
+                                        <PageTransition>
+                                            <Home />
+                                        </PageTransition>
+                                    }
+                                />
+                                <Route 
+                                    path="/sign-in" 
+                                    element={
+                                        <PageTransition>
+                                            <SignIn />
+                                        </PageTransition>
+                                    } 
+                                />
+                                <Route
+                                    path="/game-rooms"
+                                    element={
+                                        <PageTransition>
+                                            <GameRooms />
+                                        </PageTransition>
+                                    }
+                                />
+                            </Routes>
+                            </AnimatePresence>
+                        <Footer />
+                    </>
+                )}
+        </div>
+    );
+}
+
+function AppWrapper() {
     return (
         <Router>
-            <div className="App">
-                <Navbar />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/sign-in" element={<SignIn />} />
-                    <Route
-                        path="/game-rooms"
-                        element={
-                            <ProtectedRoute>
-                                <GameRooms />
-                            </ProtectedRoute>
-                        }
-                    />
-                </Routes>
-                <Footer />
-            </div>
+            <App />
         </Router>
     );
 }
 
-export default App;
+export default AppWrapper;
