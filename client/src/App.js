@@ -9,6 +9,7 @@ import { AnimatePresence } from 'framer-motion';
 import './styles/App.css';
 import PageTransition from './components/PageTransition';
 import SplashScreen from './components/SplashScreen';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
     const location = useLocation();
@@ -56,6 +57,14 @@ function App() {
                                             <GameRooms />
                                         </PageTransition>
                                     }
+                                />
+                                <Route 
+                                    path="/privacy-policy" 
+                                    element={
+                                        <PageTransition>
+                                        <PrivacyPolicy />
+                                        </PageTransition>
+                                    } 
                                 />
                             </Routes>
                             </AnimatePresence>
