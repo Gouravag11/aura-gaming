@@ -74,7 +74,7 @@ const GameRooms = () => {
 
     const handlePaymentSubmission = async () => {
         try {
-            const response = await fetch('/api/events/register', {
+            const response = await fetch('https://aura-gaming.onrender.com/api/events/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
