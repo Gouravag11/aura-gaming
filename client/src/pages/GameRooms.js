@@ -12,7 +12,7 @@ const GameRooms = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch('/api/events/');
+                const response = await fetch('https://aura-gaming.onrender.com/api/events/');
                 if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
                 setEvents(data);
@@ -35,7 +35,7 @@ const GameRooms = () => {
             try {
                 const user = auth.currentUser;
                 const userID = user ? user.uid : null;
-                const response = await fetch('/api/events/register', {
+                const response = await fetch('https://aura-gaming.onrender.com/api/events/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
