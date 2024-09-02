@@ -15,7 +15,23 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/:eventID', async (req, res) => {
+    const { eventID } = req.params;
 
+    try {
+        // Fetch event details from the database
+        const event = await Event.findOne({ eventID });
+
+        if (!event) {
+            return res.status(404).json({ message: 'Event not found' });
+        }
+
+        res.json(event);
+    } catch (err) {
+        console.error('Error fetching event:', err);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 // Create a new event
 router.post('/', async (req, res) => {

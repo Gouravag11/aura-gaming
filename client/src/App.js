@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 import Home from './pages/Home';
 import SignIn from './pages/SignIn';
 import GameRooms from './pages/GameRooms';
+import GameRoom from './pages/GameRoom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import { AnimatePresence } from 'framer-motion';
@@ -64,6 +65,14 @@ function App() {
                                         <PageTransition>
                                         <PrivacyPolicy />
                                         </PageTransition>
+                                    } 
+                                />
+                                <Route 
+                                    path="/game-rooms/:eventID" 
+                                    element={
+                                        <PageTransition>
+                                        <GameRoom />
+                                        </PageTransition>              
                                     } 
                                 />
                             </Routes>

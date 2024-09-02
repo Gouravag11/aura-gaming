@@ -7,12 +7,15 @@ import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './context/AuthContext';
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { UserProvider } from './UserContext';
 
 
 ReactDOM.render(
     <React.StrictMode>
         <AuthProvider>
-            <App />
+            <UserProvider>
+                <App />
+            </UserProvider>,
         </AuthProvider>
     </React.StrictMode>,
     document.getElementById('root')

@@ -106,6 +106,8 @@ const GameRooms = () => {
         setErrorMessage('');
     };
 
+    
+
     return (
         <div className="game-rooms">
             <br />
@@ -159,8 +161,9 @@ const GameRooms = () => {
                                 <br/>
                                 <div className="divider"></div> 
                                 <h4>Pay using UPI</h4>
+                                
                                 <div className="qrcode-container">
-                                    <QRCodeCanvas value={`upi://pay?pa=gouravag11@icici&pn=Aura Gaming&am=${selectedEvent.fee}&cu=INR&tn=${selectedEvent.title}`} size={200} />
+                                    <QRCodeCanvas value={`upi://pay?pa=gouravag11@icici&pn=Aura Gaming&am=${selectedEvent.fee}&cu=INR&tn=${encodeURIComponent(selectedEvent.eventID)}`} size={200} />
                                 </div>
                                 <p>Scan the QR code above to pay ₹{selectedEvent.fee}</p>
                                 <input 
