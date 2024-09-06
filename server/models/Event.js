@@ -10,6 +10,7 @@ const EventSchema = new mongoose.Schema({
     fee: { type: Number, default: 0 },
     eventType: { type: String, required: true },
     participationType: { type: String, required: true },
+    status: { type: String, required: true },
     registeredUsers: [
         {
             userID: { type: String, required: true },

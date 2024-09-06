@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Event = require('../models/Event');
+const User = require('../models/User');
 
 // Get all events
 router.get('/', async (req, res) => {
@@ -49,7 +50,7 @@ router.post('/', async (req, res) => {
 
 // Register a user for an event
 router.post('/register', async (req, res) => {
-    const { eventID, userID, paymentReference } = req.body;
+    const { eventID, userAID, paymentReference } = req.body;
 
     try {
         const event = await Event.findOne({ eventID });
@@ -58,16 +59,33 @@ router.post('/register', async (req, res) => {
             return res.status(404).json({ message: 'Event not found' });
         }
 
-        const userAlreadyRegistered = event.registeredUsers.find(user => user.userID === userID);
+        const userAlreadyRegistered = event.registeredUsers.find(user => user.userID === userAID);
 
         if (userAlreadyRegistered) {
             return res.status(400).json({ message: 'User already registered or in process' });
         }
 
-        event.registeredUsers.push({ userID, status: 'processing', paymentReference });
-        await event.save();
+        if (event.fee === 0) {
+            // If the event is free, directly confirm the registration
+            event.registeredUsers.push({ userID: userAID, status: 'confirmed', paymentReference: '' });
+            
+            await User.updateOne(
+                { userID: userAID },
+                { $addToSet: { registeredEvents: { eventID, status: 'active' } } },
+                { upsert: true }
+            );
+            
+            await event.save();
 
-        return res.status(200).json({ message: 'User registration is processing' });
+            return res.status(201).json({ message: 'User registration confirmed for free event' });
+        } else {
+            // If the event has a fee, proceed with the existing logic
+            event.registeredUsers.push({ userAID, status: 'processing', paymentReference });
+
+            await event.save();
+
+            return res.status(202).json({ message: 'User registration is processing' });
+        }
     } catch (err) {
         console.error(err);
         return res.status(500).json({ message: 'Internal server error' });

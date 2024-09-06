@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import GameCarousel from '../components/GameCarousel';
+import '../styles/Home.css';
 
 const Home = () => {
     return (

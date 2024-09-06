@@ -1,0 +1,165 @@
+/* Global font styling */
+body {
+    font-family: 'Montserrat', sans-serif; /* For general text */
+}
+
+/* Navbar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px 10px 0px;
+    background-color: transparent;
+    color: white;
+    width: 100%; /* Ensure the navbar takes the full width */
+    box-sizing: border-box; /* Prevent overflow due to padding/margin */
+}
+
+/* Navbar logo */
+.navbar-logo {
+    display: flex;
+    align-items: center; /* Vertically center the logo */
+    background-color: transparent; /* Remove extra background */
+}
+
+/* Link styling */
+.nav-link {
+    display: flex;
+    align-items: center; /* Vertically center the link */
+    transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #f39c12;
+    transform: scale(1.0);
+}
+
+.navbar-links a.nav-link:hover {
+    color: #f39c12; /* Ensure this is visible and not overridden */
+    transform: scale(1.1);
+}
+
+/* Center section */
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; /* Allow this section to take up available space */
+    align-items: center; /* Vertically center the center items */
+    padding: 0 20px;
+}
+
+/* Right section */
+.navbar-right {
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    margin-right: 0;
+}
+
+/* Navbar links */
+.navbar-links {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1; /* Allow the list to take up available space */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Individual navbar link */
+.navbar-links li {
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.navbar-links a {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    color: #ecf0f1;
+}
+
+.navbar-links a:hover {
+    color: #ddd;
+}
+
+/* Icon styling */
+.icon {
+    height: 30px;
+    width: 30px;
+    margin-right: 8px;
+}
+
+/* Logo link styling */
+.logo-link {
+    display: flex;
+    align-items: center; /* Vertically center the logo link */
+    text-decoration: none;
+    color: #ecf0f1;
+    background-color: transparent; /* Ensure no background */
+}
+
+/* Logo image */
+.logo-img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+/* Logo text styling */
+.logo-text {
+    font-family: 'Playfair Display', serif; /* Luxurious logo font */
+    font-size: 26px;
+    font-weight: 700;
+    color: #ecf0f1;
+    letter-spacing: 1px;
+    position: relative;
+    top: -1px;
+}
+
+.logo-text:hover {
+    transition: transform 0.3s ease;
+    color: #f39c12;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        padding: 0; /* Removes any extra padding */
+        margin: 0;  /* Removes any extra margin */
+    }
+
+    .navbar-links a {
+        font-size: 0; /* Hide text in mobile view */
+    }
+
+    .navbar-links a .icon {
+        margin-right: 0; /* Remove margin in mobile view */
+    }
+
+    .logo-text {
+        font-size: 0; /* Hide logo text in mobile view */
+    }
+
+    .navbar-links li {
+        margin-left: 10px; /* Reduce margin in mobile view */
+    }
+
+    .logo-img {
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+    }
+
+    .icon {
+        height: 35px;
+        width: 35px;
+        margin-right: 0px;
+    }
+}
+
+/* Divider styling below the navbar */
+.navbar-divider {
+    width: 100%;
+    height: 2px;
+    background-color: #444; /* Dark gray color for the divider */
+    margin-top: 10px; /* Adjust space between the navbar and the divider */
+}

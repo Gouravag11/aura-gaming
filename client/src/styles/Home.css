@@ -1,0 +1,23 @@
+body {
+    font-family: 'Rokkitt', sans-serif;
+}
+.home-container {
+    padding: 20px;
+    text-align: center;
+}
+  
+.description-section {
+    margin-top: 30px;
+}
+  
+.description-section h2 {
+    font-size: 2rem;
+    color: #999;
+}
+  
+.description-section p {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 10px;
+    line-height: 1.6;
+}

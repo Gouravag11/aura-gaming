@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import {QRCodeCanvas} from 'qrcode.react'; // Import the QRCode component from qrcode.react
 import '../styles/GameRooms.css';
-import { getAuth } from "firebase/auth";
-
-const auth = getAuth();
+import { useUser } from '../UserContext';
 
 const GameRooms = () => {
+    const user = useUser();
+    const userAID = user?.uid;
     const [events, setEvents] = useState([]);
+    const [activeEvent, setActiveEvent] = useState(null);
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [paymentReference, setPaymentReference] = useState(''); // State to store payment reference ID
-    const [userID, setUserID] = useState(null); // State to store the user's ID
     const [errorMessage, setErrorMessage] = useState('');
 
     useEffect(() => {
@@ -24,15 +24,35 @@ const GameRooms = () => {
                 console.error('Error fetching events:', err);
             }
         };
-
         fetchData();
 
-        // Set the user ID from Firebase auth
-        const user = auth.currentUser;
-        if (user) {
-            setUserID(user.uid);
-        }
-    }, []);
+        const fetchActiveEvent = async () => {
+            try {
+                if(userAID!== null){
+                    const response = await fetch(`/api/users/active-events/${userAID}`);
+                    const activeEve = await response.json();
+                    if (activeEve.length > 0) {
+                        try {
+                            const response = await fetch(`https://aura-gaming.onrender.com/api/events/${activeEve[0].eventID}`);
+                            if (response.ok) {
+                              const data = await response.json();
+                              setActiveEvent(data);
+                            }
+                        }catch (err) {
+                            console.error('Error fetching event data:', err);
+                        }
+                    }
+                }
+                
+            } catch (err) {
+                console.error('Error fetching active events:', err);
+            }
+        };
+        fetchActiveEvent();
+
+    }, [userAID]);
+
+    
 
     const handleRegisterClick = (event) => {
         setSelectedEvent(event);
@@ -41,47 +61,19 @@ const GameRooms = () => {
     };
 
     const handleProceedClick = async () => {
-        if (selectedEvent.fee === 0) {
-            try {
-                const response = await fetch('https://aura-gaming.onrender.com/api/events/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ eventID: selectedEvent.eventID, userID }),
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert('Successfully registered!');
-                    closePopup();
-                } else {
-                    alert(data.message);
-                }
-            } catch (err) {
-                console.error('Error registering user:', err);
-            }
-        } else {
-            // If the event is paid, show the payment input fields
-            if (paymentReference.trim() === '') {
-                setErrorMessage('❗Payment reference ID is required.');
+        if (selectedEvent.fee !== 0 && paymentReference.trim() === '') {
+            setErrorMessage('❗Payment reference ID is required.');
                 return;
-            }
-            handlePaymentSubmission();
-        }
-    };
-
-    const handlePaymentSubmission = async () => {
+        } 
         try {
-            const response = await fetch('https://aura-gaming.onrender.com/api/events/register', {
+            const response = await fetch('/api/events/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     eventID: selectedEvent.eventID,
-                    userID,
+                    userAID,
                     paymentReference, // Include the payment reference ID in the request
                 }),
             });
@@ -89,11 +81,11 @@ const GameRooms = () => {
             const data = await response.json();
 
             if (response.ok) {
-                alert('Registration in processing. We will confirm your payment shortly.');
-                closePopup();
+                alert(response.status);
             } else {
                 alert(data.message);
             }
+            closePopup();
         } catch (err) {
             console.error('Error submitting payment:', err);
         }
@@ -110,6 +102,23 @@ const GameRooms = () => {
 
     return (
         <div className="game-rooms">
+            <br/>
+            {activeEvent && (
+                <div className="active-event-card">
+                    <div className="active-event-card-content">
+                        <img src={activeEvent.bannerImage} alt={activeEvent.title} className="active-event-image" />
+                        <div className="active-event-timing">
+                            <p>Starts: </p>
+                            <h7>{activeEvent.timing}</h7>
+                        </div>
+                        <div className="active-event-button">
+                            <a href={`/game-rooms/${activeEvent.eventID}`} className="active-event-redirect-button">
+                            Enter Room
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            )}
             <br />
             <h1>Upcoming Games</h1>
             <br />
@@ -125,7 +134,7 @@ const GameRooms = () => {
                                 <button 
                                     className="register-button" 
                                     onClick={() => handleRegisterClick(event)}>
-                                    Register
+                                    Learn More
                                 </button>
                             </div>
                         </div>
@@ -159,7 +168,7 @@ const GameRooms = () => {
                         {selectedEvent.fee > 0 && (
                             <div className="payment-section">
                                 <br/>
-                                <div className="divider"></div> 
+                                <div className="divider2"></div> 
                                 <h4>Pay using UPI</h4>
                                 
                                 <div className="qrcode-container">

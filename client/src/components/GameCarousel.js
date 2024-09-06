@@ -6,7 +6,7 @@ const GameCarousel = () => {
         <Carousel
             controls={true} // Remove the left/right controls if not needed
             indicators={true} // Remove the indicators below the carousel if not needed
-            interval={3000} // Set the time interval between slides (in milliseconds)
+            interval={5000} // Set the time interval between slides (in milliseconds)
             pause={false} // Continue scrolling even if the user hovers over the carousel
             fade={true} // Enable fade transition between slides
             wrap={true} // Enable looping of slides

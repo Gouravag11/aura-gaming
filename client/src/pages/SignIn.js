@@ -6,10 +6,34 @@ import { useNavigate } from 'react-router-dom';
 const SignIn = () => {
     const navigate = useNavigate();
 
+    const regUser = async (user) => {
+        try {
+            const userDet = await fetch(`/api/users/${user.uid}`);
+            if (userDet.status === 404){
+                const response = await fetch('/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userID: user.uid,
+                        name: user.displayName,
+                        aura: 0, // Include the payment reference ID in the request
+                    }),
+                });
+                await response.json();
+            }
+            console.log('User signed in');
+            
+        }catch{
+
+        }
+    };
+
     const signInWithGoogle = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
-                console.log(result.user);
+                regUser(result.user);
                 navigate('/');
             })
             .catch((error) => {
