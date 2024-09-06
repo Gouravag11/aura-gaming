@@ -8,7 +8,7 @@ const SignIn = () => {
 
     const regUser = async (user) => {
         try {
-            const userDet = await fetch(`/api/users/${user.uid}`);
+            const userDet = await fetch(`https://aura-gaming.onrender.com/api/users/${user.uid}`);
             if (userDet.status === 404){
                 const response = await fetch('/api/users', {
                     method: 'POST',

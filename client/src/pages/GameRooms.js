@@ -29,7 +29,7 @@ const GameRooms = () => {
         const fetchActiveEvent = async () => {
             try {
                 if(userAID!== null){
-                    const response = await fetch(`/api/users/active-events/${userAID}`);
+                    const response = await fetch(`https://aura-gaming.onrender.com/api/users/active-events/${userAID}`);
                     const activeEve = await response.json();
                     if (activeEve.length > 0) {
                         try {
@@ -66,7 +66,7 @@ const GameRooms = () => {
                 return;
         } 
         try {
-            const response = await fetch('/api/events/register', {
+            const response = await fetch('https://aura-gaming.onrender.com/api/events/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
