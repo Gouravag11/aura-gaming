@@ -80,7 +80,7 @@ router.post('/register', async (req, res) => {
             return res.status(201).json({ message: 'User registration confirmed for free event' });
         } else {
             // If the event has a fee, proceed with the existing logic
-            event.registeredUsers.push({ userAID, status: 'processing', paymentReference });
+            event.registeredUsers.push({ userID: userAID, status: 'processing', paymentReference: paymentReference });
 
             await event.save();
 
