@@ -3,15 +3,17 @@ import { ref, push, set, onValue } from 'firebase/database';
 import { database } from '../firebase';
 
 // Send a message to a specific event chatroom
-export const sendMessage = (eventID, userID, username, message) => {
+export const sendMessage = (eventID, userID, username, message, replyTo = null) => {
   const messageRef = push(ref(database, `chats/${eventID}`));
   set(messageRef, {
     userID,
     username,
     message,
+    replyTo,
     timestamp: new Date().toLocaleString(),
   });
 };
+
 
 // Fetch messages from a specific event chatroom
 export const fetchMessages = (eventID, callback) => {

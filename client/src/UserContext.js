@@ -15,6 +15,9 @@ export const UserProvider = ({ children }) => {
         setUser({
           uid: user.uid,
           email: user.email,
+          username: user.displayName,
+          profilePic: user.photoURL
+          
           // Add other user details you want to store globally
         });
       } else {

@@ -9,7 +9,7 @@ const Footer = () => {
                 <div className="footer-logo">
                     <Link to="/" className="logo-link">
                         <img src="/images/logo.png" alt="Aura Gaming Logo" className="footer-logo-img" />
-                        <span className="footer-logo-text">Aura Gaming</span>
+                        <img src="/images/aura.png" alt="Aura Gaming" className="img-logo" />
                     </Link>
                 </div>
                 <ul className="footer-links">

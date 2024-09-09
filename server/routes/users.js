@@ -15,18 +15,18 @@ router.post('/', async (req, res) => {
 });
 
 // Get all users
-// router.get('/:userID', async (req, res) => {
-//     const userID = req.params;
-//     try {
-//         const user = await User.findOne(userID);
-//         if (!user) {
-//             return res.status(404).json();
-//         }
-//         res.json(user);
-//     } catch (err) {
-//         res.status(500).json({ error: err.message });
-//     }
-// });
+router.get('/:userID', async (req, res) => {
+    const userID = req.params;
+    try {
+        const user = await User.findOne(userID);
+        if (!user) {
+            return res.status(404).json();
+        }
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
 
 router.get('/active-events/:userID', async (req, res) => {
     const {userID}  = req.params;

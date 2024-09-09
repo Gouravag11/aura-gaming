@@ -31,7 +31,8 @@ const Navbar = () => {
                     >
                         <Link to="/" className="logo-link">
                             <img src="/images/logo.png" alt="Aura Gaming Logo" className="logo-img" />
-                            <span className="logo-text">Aura Gaming</span>
+                            <img src="/images/aura.png" alt="Aura Gaming" className="logo-img-t" />
+                            {/* <span className="logo-text">Aura Gaming</span> */}
                         </Link>
                     </motion.nav>
                 </div>

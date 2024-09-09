@@ -77,7 +77,9 @@ function App() {
                                 />
                             </Routes>
                             </AnimatePresence>
-                        <Footer />
+                            {!location.pathname.startsWith('/game-rooms/') && (
+                                <Footer />
+                            )}
                     </>
                 )}
         </div>

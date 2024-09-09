@@ -179,7 +179,12 @@ const GameRooms = () => {
                                     type="text" 
                                     placeholder="Enter Payment Reference ID" 
                                     value={paymentReference} 
-                                    onChange={(e) => setPaymentReference(e.target.value)} 
+                                    onChange={(e) => setPaymentReference(e.target.value)}
+                                    onKeyPress={(e) => {
+                                        if (e.key === 'Enter') {
+                                          handleProceedClick();
+                                        }
+                                      }}
                                     required 
                                 />
                                 {errorMessage && <p className="error-message">{errorMessage}</p>}
